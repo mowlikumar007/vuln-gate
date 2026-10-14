@@ -125,6 +125,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       HAS_SERVER: ${{ secrets.SERVER_HOST != '' }}
+      HAS_RENDER_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK != '' }}
     steps:
       - uses: actions/checkout@v4
 

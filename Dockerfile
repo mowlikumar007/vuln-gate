@@ -19,5 +19,5 @@ COPY app/app.py .
 RUN adduser -D -u 10001 appuser
 USER appuser
 
-EXPOSE 5000
-CMD ["gunicorn", "-b", "0.0.0.0:5000", "app:app"]
+EXPOSE 10000
+CMD ["sh", "-c", "gunicorn -b 0.0.0.0:${PORT:-10000} app:app"]

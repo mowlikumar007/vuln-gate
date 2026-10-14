@@ -149,6 +149,12 @@ jobs:
           docker push "$IMAGE:${{ github.sha }}"
           docker push "$IMAGE:latest"
 
+      - name: Trigger Render deployment
+        if: env.HAS_RENDER_HOOK == 'true'
+        env:
+          RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
+        run: curl --fail --show-error --silent --request POST "$RENDER_DEPLOY_HOOK"
+
       - name: Deploy to server over SSH
         if: env.HAS_SERVER == 'true'
         uses: appleboy/ssh-action@v1.0.3
@@ -165,5 +171,5 @@ jobs:
             curl -fsS http://localhost/health
 
       - name: Skipped deploy notice
-        if: env.HAS_SERVER != 'true'
-        run: echo "::warning::SERVER_HOST secret not set - image pushed to GHCR but not deployed to a server."
+        if: env.HAS_SERVER != 'true' && env.HAS_RENDER_HOOK != 'true'
+        run: echo "::warning::No deployment target configured - image pushed to GHCR only."

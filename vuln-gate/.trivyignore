@@ -1,0 +1,3 @@
+# Allowlist for accepted-risk vulnerabilities (one CVE ID per line).
+# Every entry must have a comment explaining why it is accepted and an expiry date.
+# Left empty on purpose: the gate should not silently skip anything.

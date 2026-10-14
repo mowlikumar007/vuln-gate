@@ -1,0 +1,11 @@
+# Used by scripts/scan-local.sh (the GitHub workflow sets the same values explicitly).
+# Keep this in sync with SEVERITY_THRESHOLD in .github/workflows/security-gate.yml
+scan:
+  scanners:
+    - vuln
+severity:
+  - CRITICAL
+  - HIGH
+ignore-unfixed: true
+exit-code: 1
+format: table

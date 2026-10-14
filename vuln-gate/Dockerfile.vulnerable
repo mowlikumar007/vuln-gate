@@ -1,0 +1,19 @@
+# INTENTIONALLY VULNERABLE image - expected to FAIL the Trivy severity gate.
+# Old base image + old pinned Python packages with known CVEs. Training use only.
+FROM python:3.8
+
+ARG GIT_SHA=local
+ARG APP_VERSION=1.0.0
+ENV BUILD_VARIANT=vulnerable \
+    GIT_SHA=${GIT_SHA} \
+    APP_VERSION=${APP_VERSION} \
+    PYTHONUNBUFFERED=1
+
+WORKDIR /srv
+COPY app/requirements-vulnerable.txt .
+RUN pip install --no-cache-dir -r requirements-vulnerable.txt
+
+COPY app/app.py .
+
+EXPOSE 5000
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "app:app"]

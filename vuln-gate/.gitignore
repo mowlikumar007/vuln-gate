@@ -1,0 +1,10 @@
+deploy_key
+deploy_key.pub
+*.pem
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+reports/*.json
+reports/*.txt
+!reports/.gitkeep

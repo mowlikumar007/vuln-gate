@@ -66,7 +66,7 @@ jobs:
       # Always produce the FULL report (all severities) and never fail here,
       # so the evidence exists even when the gate below fails.
       - name: Generate full vulnerability report (table)
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: ${{ env.IMAGE_NAME }}:${{ github.sha }}
           scanners: vuln
@@ -75,7 +75,7 @@ jobs:
           exit-code: "0"
 
       - name: Generate machine-readable report (JSON)
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: ${{ env.IMAGE_NAME }}:${{ github.sha }}
           scanners: vuln
@@ -107,7 +107,7 @@ jobs:
 
       # THE GATE: exit-code 1 fails the job when findings match the policy.
       - name: Severity gate (fails on policy violation)
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: ${{ env.IMAGE_NAME }}:${{ github.sha }}
           scanners: vuln
